@@ -1,0 +1,346 @@
+/* =========================================
+   INHERITED VARIABLES (Ensure these exist)
+   ========================================= */
+:root {
+  --gold-primary: #C5A059;
+  --gold-highlight: #F4E4BC;
+  --gold-shadow: #8A6E2F;
+  --obsidian-glass: rgba(10, 12, 16, 0.85); /* Slightly darker for content readability */
+  --glass-border: rgba(197, 160, 89, 0.3);
+  --steel-grey: #a0a0a0;
+}
+body, .body {
+  background: radial-gradient(circle at center, #1F2833 0%, #000000 85%);
+  color: #e5e5e5;
+  font-family: 'Cinzel', serif;
+  overflow-x: hidden;
+  margin: 0;
+}
+/* ===== SCROLL ANIMATIONS ===== */
+.fade-up-domain,
+.fade-left-domain,
+.fade-right-domain {
+    opacity: 0;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-up-domain { transform: translateY(40px); }
+.fade-left-domain { transform: translateX(-40px); }
+.fade-right-domain { transform: translateX(40px); }
+
+.fade-up-domain.visible,
+.fade-left-domain.visible,
+.fade-right-domain.visible {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+/* ===== BACK BUTTON (Forged Steel) ===== */
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--gold-primary);
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    padding: 0.75rem 2rem;
+    border-radius: 4px; /* Sharper corners for medieval feel */
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.back-button:hover {
+    background: rgba(197, 160, 89, 0.15);
+    border-color: var(--gold-primary);
+    transform: translateX(-5px);
+    box-shadow: 0 0 15px rgba(197, 160, 89, 0.2);
+    color: var(--gold-highlight);
+}
+
+/* ===== HEADER SECTION (Obsidian Card) ===== */
+.domain-header {
+    background: var(--obsidian-glass);
+    backdrop-filter: blur(30px) saturate(120%);
+    -webkit-backdrop-filter: blur(30px) saturate(120%);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 4rem 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 
+        0 20px 50px rgba(0, 0, 0, 0.6),
+        inset 0 0 30px rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(197, 160, 89, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.domain-header::before {
+    content: "";
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(197, 160, 89, 0.08) 0%, transparent 70%);
+    animation: pulse-glow 5s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.2); opacity: 0.6; }
+}
+
+.header-content {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.domain-icon {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    /* Gold Shadow for Icon */
+    filter: drop-shadow(0 0 15px rgba(197, 160, 89, 0.6)); 
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.domain-title {
+    font-family: 'Cinzel', serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    
+    /* Molten Gold Gradient */
+    background: linear-gradient(to bottom, var(--gold-highlight) 0%, var(--gold-primary) 50%, var(--gold-shadow) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 0px rgba(0,0,0,0.8));
+}
+
+.title-divider {
+    height: 3px;
+    width: 120px;
+    background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+    margin: 1.5rem auto;
+    border-radius: 2px;
+    box-shadow: 0 0 15px var(--gold-primary);
+}
+
+/* ===== CONTENT CARD ===== */
+.content-card {
+    background: var(--obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 3rem 2.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+/* ===== CRITERIA SECTION ===== */
+.criteria-section {
+    margin-bottom: 4rem;
+    position: relative;
+    z-index: 1;
+}
+
+.section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--gold-primary);
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px rgba(197, 160, 89, 0.2);
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+    padding-bottom: 1rem;
+    display: inline-block;
+}
+
+.criteria-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.criterion-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    padding: 1.5rem;
+    /* Subtle Gold Tint Background */
+    background: linear-gradient(90deg, rgba(197, 160, 89, 0.05) 0%, transparent 100%);
+    border-left: 3px solid var(--gold-primary);
+    border-radius: 0 8px 8px 0;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.criterion-item:hover {
+    background: linear-gradient(90deg, rgba(197, 160, 89, 0.15) 0%, transparent 100%);
+    transform: translateX(10px);
+    box-shadow: -5px 0 15px rgba(197, 160, 89, 0.1);
+}
+
+.check-icon {
+    color: var(--gold-primary);
+    font-size: 1.2rem;
+    margin-top: 0.2rem;
+    filter: drop-shadow(0 0 5px var(--gold-primary));
+}
+
+.criterion-text {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.1rem;
+    color: #d0d0d0;
+    line-height: 1.6;
+}
+
+/* ===== LEADS GRID (Character Cards) ===== */
+.leads-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+    z-index: 1;
+}
+
+.lead-card {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    padding: 2.5rem 2rem;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Card Hover Glow */
+.lead-card::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    width: 100px; height: 100px;
+    background: radial-gradient(circle at top right, rgba(197, 160, 89, 0.2) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.lead-card:hover {
+    background: rgba(10, 12, 16, 0.9);
+    border-color: var(--gold-primary);
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(197, 160, 89, 0.15);
+}
+
+.lead-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--gold-highlight);
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.lead-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.info-item {
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    color: #ccc;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed rgba(197, 160, 89, 0.2);
+    padding-bottom: 0.5rem;
+}
+
+.info-label {
+    font-weight: 600;
+    color: var(--gold-primary);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+/* ===== APPLY BUTTON (The King's Button) ===== */
+.apply-button {
+    width: 100%;
+    background: transparent;
+    color: var(--gold-primary);
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: 3px;
+    padding: 1.5rem 3rem;
+    border: 1px solid var(--gold-primary);
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: inset 0 0 20px rgba(197, 160, 89, 0.1);
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+}
+
+/* Fill effect on hover */
+.apply-button::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: var(--gold-primary);
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.apply-button:hover {
+    color: #050505; /* Black text on Gold background */
+    box-shadow: 0 0 30px rgba(197, 160, 89, 0.6);
+    border-color: var(--gold-highlight);
+    transform: translateY(-3px);
+}
+
+.apply-button:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .domain-header { padding: 3rem 1.5rem; }
+    .domain-title { font-size: 2.2rem; }
+    .content-card { padding: 2rem 1rem; }
+    .leads-grid { grid-template-columns: 1fr; }
+    .apply-button { font-size: 1.1rem; padding: 1.2rem; }
+}
