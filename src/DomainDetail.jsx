@@ -2,6 +2,10 @@ import React, { useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./DomainDetail.css";
+import { gsap } from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+gsap.registerPlugin(ScrollToPlugin);
 
 const domainsData = {
     // Tech Domains
@@ -335,6 +339,11 @@ const DomainDetail = () => {
     const { domainId } = useParams();
     const navigate = useNavigate();
     const domain = domainsData[domainId];
+
+    // GSAP Scroll Reset
+    useEffect(() => {
+        gsap.to(window, { duration: 0.5, scrollTo: 0, ease: "power2.out" });
+    }, [domainId]);
 
     useEffect(() => {
         // Initialize particles.js
