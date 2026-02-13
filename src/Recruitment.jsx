@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import "./Recruitment.css";
@@ -331,6 +332,7 @@ const Recruitment = () => {
                     Click on any domain to view recruitment criteria and contact information
                 </motion.p>
             </div>
+        </div>
     );
 };
 
