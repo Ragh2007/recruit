@@ -495,30 +495,54 @@ const DomainDetail = () => {
                         {/* Domain Lead */}
                         <div className="lead-card fade-left-domain">
                             <h3 className="lead-title">Domain Lead</h3>
-                            <div className="lead-info">
-                                <p className="info-item">
-                                    <span className="info-label">Name:</span>{" "}
-                                    {domain.domainLead.name}
-                                </p>
-                                <p className="info-item">
-                                    <span className="info-label">Phone:</span>{" "}
-                                    {domain.domainLead.phone}
-                                </p>
+                            <div className="leads-list">
+                                {domain.domainLead.name.split('&').map((name, index) => {
+                                    const phones = domain.domainLead.phone.split('/');
+                                    const phone = phones[index] || phones[0]; // Fallback to first phone if matching one not found
+                                    return (
+                                        <div key={index} className="lead-info-block" style={{
+                                            marginBottom: index !== domain.domainLead.name.split('&').length - 1 ? '1.5rem' : '0',
+                                            paddingBottom: index !== domain.domainLead.name.split('&').length - 1 ? '1.5rem' : '0',
+                                            borderBottom: index !== domain.domainLead.name.split('&').length - 1 ? '1px solid rgba(197, 160, 89, 0.2)' : 'none'
+                                        }}>
+                                            <p className="info-item">
+                                                <span className="info-label">Name:</span>{" "}
+                                                {name.trim()}
+                                            </p>
+                                            <p className="info-item">
+                                                <span className="info-label">Phone:</span>{" "}
+                                                {phone.trim()}
+                                            </p>
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </div>
 
                         {/* Assistant Lead */}
                         <div className="lead-card fade-right-domain">
                             <h3 className="lead-title">Assistant Lead</h3>
-                            <div className="lead-info">
-                                <p className="info-item">
-                                    <span className="info-label">Name:</span>{" "}
-                                    {domain.assistantLead.name}
-                                </p>
-                                <p className="info-item">
-                                    <span className="info-label">Phone:</span>{" "}
-                                    {domain.assistantLead.phone}
-                                </p>
+                            <div className="leads-list">
+                                {domain.assistantLead.name.split('&').map((name, index) => {
+                                    const phones = domain.assistantLead.phone.split('/');
+                                    const phone = phones[index] || phones[0]; // Fallback to first phone
+                                    return (
+                                        <div key={index} className="lead-info-block" style={{
+                                            marginBottom: index !== domain.assistantLead.name.split('&').length - 1 ? '1.5rem' : '0',
+                                            paddingBottom: index !== domain.assistantLead.name.split('&').length - 1 ? '1.5rem' : '0',
+                                            borderBottom: index !== domain.assistantLead.name.split('&').length - 1 ? '1px solid rgba(197, 160, 89, 0.2)' : 'none'
+                                        }}>
+                                            <p className="info-item">
+                                                <span className="info-label">Name:</span>{" "}
+                                                {name.trim()}
+                                            </p>
+                                            <p className="info-item">
+                                                <span className="info-label">Phone:</span>{" "}
+                                                {phone.trim()}
+                                            </p>
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </div>
                     </div>

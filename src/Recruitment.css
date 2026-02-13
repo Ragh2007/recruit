@@ -298,15 +298,17 @@ body,
   padding: 0 2rem;
 }
 
-/* Individual Domain Card - Default State (Dark with subtle gradient) */
+/* Individual Domain Card - Default State (Dark with visible orange gradient) */
 .lead-card {
-  /* Dark background with subtle orange gradient inside */
+  /* More visible orange gradient inside */
   background: linear-gradient(135deg,
-      rgba(10, 5, 0, 0.95) 0%,
-      rgba(30, 15, 5, 0.9) 30%,
-      rgba(40, 20, 8, 0.85) 50%,
-      rgba(30, 15, 5, 0.9) 70%,
-      rgba(10, 5, 0, 0.95) 100%);
+      rgba(20, 10, 5, 0.98) 0%,
+      rgba(50, 30, 15, 0.95) 20%,
+      rgba(80, 50, 25, 0.9) 40%,
+      rgba(100, 60, 30, 0.88) 50%,
+      rgba(80, 50, 25, 0.9) 60%,
+      rgba(50, 30, 15, 0.95) 80%,
+      rgba(20, 10, 5, 0.98) 100%);
   backdrop-filter: blur(10px);
   border: 1px solid var(--glass-border);
   border-radius: 12px;
@@ -324,7 +326,8 @@ body,
   box-shadow:
     0 4px 15px rgba(0, 0, 0, 0.5),
     inset 0 1px 0 rgba(255, 255, 255, 0.05),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+    inset 0 0 60px rgba(197, 160, 89, 0.08);
   transform-style: preserve-3d;
 }
 
@@ -337,15 +340,15 @@ body,
   width: 80%;
   height: 80%;
   background: radial-gradient(circle,
-      rgba(197, 160, 89, 0.08) 0%,
-      rgba(197, 160, 89, 0.03) 40%,
+      rgba(197, 160, 89, 0.15) 0%,
+      rgba(197, 160, 89, 0.08) 40%,
       transparent 70%);
   transform: translate(-50%, -50%);
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.5s ease;
   pointer-events: none;
   border-radius: 50%;
-  filter: blur(20px);
+  filter: blur(30px);
 }
 
 /* HOVER STATE: Enhanced gradient with glow */
