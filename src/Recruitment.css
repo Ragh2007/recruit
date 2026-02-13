@@ -234,6 +234,7 @@ body,
 
 /* Golden fill on hover */
 .apply-btn::before {
+  color: #111;
   content: '';
   position: absolute;
   inset: 0;
@@ -245,6 +246,7 @@ body,
 }
 
 .apply-btn:hover::before {
+  color: #111;
   transform: scaleX(1);
   transform-origin: left;
 }
@@ -270,6 +272,7 @@ body,
 }
 /* Trigger animation on hover */
 .apply-btn:hover::after {
+  color: #111;
   animation: sheenSlash 0.9s ease forwards;
 }
 
