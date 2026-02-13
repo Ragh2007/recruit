@@ -370,13 +370,12 @@ body,
 
 /* HOVER STATE: Title stays visible with white color and strong shadow */
 .lead-card:hover .lead-title {
-  color: #ffffff;
+  color: rgba(197, 160, 89, 0.8);
   text-shadow:
     0 2px 8px rgba(0, 0, 0, 0.5),
     0 0 20px rgba(0, 0, 0, 0.3);
   font-weight: 900;
 }
-.lead-card:hover .lead-title { color: #050505; text-shadow: none; }
 .domain-icon { width: 80px; height: 80px; transition: 0.3s; filter: drop-shadow(0 0 10px rgba(197, 160, 89, 0.4)); object-fit: contain;}
 .lead-card:hover .domain-icon { transform: scale(1.1); filter: brightness(0); }
 
