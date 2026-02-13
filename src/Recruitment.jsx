@@ -2,9 +2,8 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import "./Recruitment.css";
 import { useNavigate } from "react-router-dom";
-// Ensure these paths match your project structure
+// Ensure this path matches your project structure
 import throne from "/Images/1770564850_pasted.png";
-import dragon from "/Images/pngegg.png";
 
 const domains = [
     // Tech Domains
@@ -132,11 +131,7 @@ const Recruitment = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Intersection Observer for scroll animations
-        const animatedElements = document.querySelectorAll(
-            ".fade-up, .fade-down, .zoom-in, .slide-up"
-        );
-
+        const animatedElements = document.querySelectorAll(".fade-up, .fade-down, .zoom-in, .slide-up");
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
@@ -147,12 +142,8 @@ const Recruitment = () => {
             },
             { threshold: 0.1 }
         );
-
         animatedElements.forEach((el) => observer.observe(el));
-
-        return () => {
-            observer.disconnect();
-        };
+        return () => observer.disconnect();
     }, []);
 
     const handleApplyNow = () => {
@@ -173,7 +164,6 @@ const Recruitment = () => {
     const techDomains = domains.filter(d => d.category === 'tech');
     const nonTechDomains = domains.filter(d => d.category === 'non-tech');
 
-    // Reusable Card Component to ensure consistent theme application
     const DomainCard = ({ domain, index }) => (
         <motion.div
             layout
@@ -184,7 +174,7 @@ const Recruitment = () => {
             whileHover={{ scale: 1.03, y: -5 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => handleDomainClick(domain.id)}
-            className="lead-card cursor-pointer" // Uses Master CSS class
+            className="lead-card cursor-pointer"
         >
             <div className="icon-container" style={{ marginBottom: '1.5rem' }}>
                 <img
@@ -194,7 +184,7 @@ const Recruitment = () => {
                     style={{ width: '80px', height: '80px' }} // Adjusted size for grid
                 />
             </div>
-            <h3 className="lead-title text-center" style={{ fontSize: '1.4rem', marginBottom: 0 }}>
+            <h3 className="lead-title text-center">
                 {domain.name}
             </h3>
         </motion.div>
@@ -320,19 +310,29 @@ const Recruitment = () => {
                             </div>
                         </div>
                     </div>
-
-                    {/* Footer Text */}
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 0.7 }}
-                        viewport={{ once: true }}
-                        className="hero-subtitle text-center mt-8 pb-12"
-                    >
-                        Click on any domain to view recruitment criteria and contact information
-                    </motion.p>
                 </div>
+
+                {/* Non-Tech Domains */}
+                <div id="non-tech-domains" className="domains-section mt-24 mb-16">
+                    <h2 className="section-heading fade-up">Non-Tech Domains</h2>
+                    <div className="leads-grid">
+                        {nonTechDomains.map((domain, index) => (
+                            <DomainCard key={domain.id} domain={domain} index={index} />
+                        ))}
+                    </div>
+                </div>
+
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 0.7 }}
+                    viewport={{ once: true }}
+                    className="hero-subtitle text-center mt-8 pb-12"
+                >
+                    Click on any domain to view recruitment criteria and contact information
+                </motion.p>
             </div>
         </div>
+    </div>
     );
 };
 
