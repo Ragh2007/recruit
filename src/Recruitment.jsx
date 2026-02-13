@@ -6,19 +6,125 @@ import { useNavigate } from "react-router-dom";
 import throne from "/Images/1770564850_pasted.png";
 
 const domains = [
-    { id: "marketing-pr-event-management", name: "Marketing PR & Event Management", icon: "/Images/Logo/Marketing.png", category: "non-tech" },
-    { id: "web-development", name: "Web Development", icon: "/Images/Logo/WebDevelopment.png", category: "tech" },
-    { id: "cloud-computing", name: "Cloud Computing", icon: "/Images/Logo/CloudComputing.png", category: "tech" },
-    { id: "iot-embedded-systems", name: "IoT & Embedded Systems", icon: "/Images/Logo/IoT&Embedded.png", category: "tech" },
-    { id: "content-writing", name: "Content Writing", icon: "/Images/Logo/ContentWriting.png", category: "non-tech" },
-    { id: "android-development", name: "Android Development", icon: "/Images/Logo/AppDevelopment.png", category: "tech" },
-    { id: "data-analytics", name: "Data Analytics", icon: "/Images/Logo/DataAnalytics.png", category: "tech" },
-    { id: "photography-video", name: "Photography & Video", icon: "/Images/Logo/PhotoVideoEditing.png", category: "non-tech" },
-    { id: "java", name: "Java", icon: "/Images/Logo/Java.png", category: "tech" },
-    { id: "ai-ml", name: "AI/ML", icon: "/Images/Logo/AIML.png", category: "tech" },
-    { id: "cyber-security", name: "Cyber Security", icon: "/Images/Logo/CyberSecurity.png", category: "tech" },
-    { id: "graphics-designing-ui-ux", name: "Graphics Designing & UI/UX", icon: "/Images/Logo/UIUX.png", category: "non-tech" },
-    { id: "game-development", name: "Game Development", icon: "/Images/Logo/gamedev.png", category: "tech" },
+    // Tech Domains
+    {
+        id: "iot",
+        name: "IOT",
+        icon: "/Images/Logo/IoT&Embedded.png",
+        category: "tech"
+    },
+    {
+        id: "embedded-systems",
+        name: "Embedded Systems",
+        icon: "/Images/Logo/IoT&Embedded.png",
+        category: "tech"
+    },
+    {
+        id: "cloud-computing",
+        name: "Cloud Computing",
+        icon: "/Images/Logo/CloudComputing.png",
+        category: "tech"
+    },
+    {
+        id: "game-development",
+        name: "Game Development",
+        icon: "/Images/Logo/gamedev.png",
+        category: "tech"
+    },
+    {
+        id: "android-development",
+        name: "Android Development",
+        icon: "/Images/Logo/AppDevelopment.png",
+        category: "tech"
+    },
+    {
+        id: "web-development",
+        name: "Web Development",
+        icon: "/Images/Logo/WebDevelopment.png",
+        category: "tech"
+    },
+    {
+        id: "java",
+        name: "Java",
+        icon: "/Images/Logo/Java.png",
+        category: "tech"
+    },
+    {
+        id: "cyber-security",
+        name: "Cyber Security",
+        icon: "/Images/Logo/CyberSecurity.png",
+        category: "tech"
+    },
+    {
+        id: "ai-ml",
+        name: "AI/ML",
+        icon: "/Images/Logo/AIML.png",
+        category: "tech"
+    },
+    {
+        id: "data-analytics",
+        name: "Data Analytics",
+        icon: "/Images/Logo/DataAnalytics.png",
+        category: "tech"
+    },
+    // Non-Tech Domains - Marketing Subcategory
+    {
+        id: "marketing",
+        name: "Marketing",
+        icon: "/Images/Logo/Marketing.png",
+        category: "non-tech",
+        subcategory: "marketing"
+    },
+    {
+        id: "event-management",
+        name: "Event Management",
+        icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E🎉%3C/text%3E%3C/svg%3E",
+        category: "non-tech",
+        subcategory: "marketing"
+    },
+    {
+        id: "entrepreneurship-startup",
+        name: "Entrepreneurship and Startup",
+        icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E🚀%3C/text%3E%3C/svg%3E",
+        category: "non-tech",
+        subcategory: "marketing"
+    },
+    // Non-Tech Domains - Creative Media & Design Subcategory
+    {
+        id: "photography",
+        name: "Photography",
+        icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E📷%3C/text%3E%3C/svg%3E",
+        category: "non-tech",
+        subcategory: "creative"
+    },
+    {
+        id: "video-editing",
+        name: "Video Editing",
+        icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E🎬%3C/text%3E%3C/svg%3E",
+        category: "non-tech",
+        subcategory: "creative"
+    },
+    {
+        id: "content-writing",
+        name: "Content Writing",
+        icon: "/Images/Logo/ContentWriting.png",
+        category: "non-tech",
+        subcategory: "creative"
+    },
+    {
+        id: "ui-ux",
+        name: "UI/UX",
+        icon: "/Images/Logo/UIUX.png",
+        category: "non-tech",
+        subcategory: "creative"
+    },
+    {
+        id: "graphic-designing",
+        name: "Graphic Designing",
+        icon: "/Images/Logo/GD.png",
+        category: "non-tech",
+        subcategory: "creative"
+    },
 ];
 
 const Recruitment = () => {
@@ -41,7 +147,7 @@ const Recruitment = () => {
     }, []);
 
     const handleApplyNow = () => {
-        alert("Application form coming soon! Please check back later.");
+        window.open('https://forms.gle/xSszBVcYnhHnEp7c8', '_blank');
     };
 
     const handleDomainClick = (domainId) => {
@@ -70,11 +176,12 @@ const Recruitment = () => {
             onClick={() => handleDomainClick(domain.id)}
             className="lead-card cursor-pointer"
         >
-            <div className="icon-container">
-                <img 
-                    src={domain.icon} 
-                    alt={domain.name} 
-                    className="domain-icon" 
+            <div className="icon-container" style={{ marginBottom: '1.5rem' }}>
+                <img
+                    src={domain.icon}
+                    alt={domain.name}
+                    className="domain-icon" // Uses Master CSS animation & shadow
+                    style={{ width: '80px', height: '80px' }} // Adjusted size for grid
                 />
             </div>
             <h3 className="lead-title text-center">
@@ -84,97 +191,124 @@ const Recruitment = () => {
     );
 
     return (
-    <div className="body">
-        {/* Snow Animation Container */}
-        <div className="snow-container">
-            {[...Array(60)].map((_, i) => {
-                const duration = 6 + Math.random() * 6; 
-                const size = Math.random() < 0.5 ? 'small-flake' : 'large-flake';
-                return (
-                    <div 
-                        key={i} 
-                        className={`ice-flake ${size}`}
-                        style={{
-                            left: `${Math.random() * 100}%`,
-                            animationDelay: `${Math.random() * 5}s`,
-                            animationDuration: `${duration}s`,
-                            opacity: Math.random() * 0.7
-                        }}
-                    >❄</div>
-                );
-            })}
-        </div>
+        <div className="body">
+            <div className="min-h-screen w-full relative overflow-hidden">
+                {/* Particles Background */}
+                <div id="particles-js" className="absolute inset-0 z-0 pointer-events-none"></div>
 
-        <div className="min-h-screen w-full relative overflow-hidden">
-            <div id="particles-js" className="absolute inset-0 z-0 pointer-events-none"></div>
+                {/* Dragon lives outside the split so it can fly anywhere */}
 
-            {/* Motto - Positioned via CSS to Left */}
-            <p className="house-motto">Winter is Coming...</p>
 
-            <div className="max-w-7xl mx-auto relative z-10">
-                <div className="hero-section">
-                    <div className="hero-visual-side">
-                         <img src={throne} alt="Iron Throne" className="iron-throne"/>
-                    </div>
+                <div className="max-w-7xl mx-auto relative z-10">
 
-                    <div className="hero-content-side">
-                        <div className="hero-box fade-down zoom-in">
-                            <motion.div
-                                initial={{ opacity: 0, y: -20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.6 }}
-                                className="hero-content"
-                            >
-                                {/* UPDATED: Title Text */}
-                                <h1 className="hero-title">
-                                    Join <span className="keep-together">E-labs</span>
-                                </h1>
-                                <div className="divider-line"></div>
-                                <p className="hero-subtitle">
-                                    Explore our domains and discover where your passion meets opportunity
-                                </p>
+                    {/* === HERO SECTION (SPLIT 50/50) === */}
+                    <div className="hero-section">
 
-                                <div className="hero-buttons">
-                                    <motion.button
-                                        whileTap={{ scale: 0.95 }}
-                                        onClick={handleApplyNow}
-                                        className="apply-btn-sheen"
-                                    >
-                                        APPLY NOW
-                                    </motion.button>
+                        {/* LEFT SIDE: THRONE */}
+                        <div className="hero-visual-side">
+                            <img
+                                src={throne}
+                                alt="Iron Throne"
+                                className="iron-throne"
+                            />
+                        </div>
 
-                                    <div className="nav-buttons">
+                        {/* RIGHT SIDE: CONTENT BOX */}
+                        <div className="hero-content-side">
+                            <div className="hero-box fade-down zoom-in">
+                                <motion.div
+                                    initial={{ opacity: 0, y: -20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.6 }}
+                                    className="hero-content"
+                                >
+                                    <h1 className="hero-title">Join E-Labs</h1>
+                                    <div className="divider-line"></div>
+                                    <p className="hero-subtitle">
+                                        Explore our domains and discover where your passion meets opportunity
+                                    </p>
+
+                                    <div className="hero-buttons">
                                         <motion.button
                                             whileHover={{ scale: 1.05 }}
                                             whileTap={{ scale: 0.95 }}
-                                            onClick={() => scrollToSection('tech-domains')}
-                                            className="nav-btn"
+                                            onClick={handleApplyNow}
+                                            className="apply-btn"
                                         >
-                                            <span>Tech Domains</span>
+                                            APPLY NOW
                                         </motion.button>
 
-                                        <motion.button
-                                            whileHover={{ scale: 1.05 }}
-                                            whileTap={{ scale: 0.95 }}
-                                            onClick={() => scrollToSection('non-tech-domains')}
-                                            className="nav-btn"
-                                        >
-                                            <span>Non-Tech Domains</span>
-                                        </motion.button>
+                                        <div className="nav-buttons">
+                                            <motion.button
+                                                whileHover={{ scale: 1.05 }}
+                                                whileTap={{ scale: 0.95 }}
+                                                onClick={() => scrollToSection('tech-domains')}
+                                                className="nav-btn"
+                                            >
+                                                <span>Tech Domains</span>
+                                                {/* SVG Here */}
+                                            </motion.button>
+
+                                            <motion.button
+                                                whileHover={{ scale: 1.05 }}
+                                                whileTap={{ scale: 0.95 }}
+                                                onClick={() => scrollToSection('non-tech-domains')}
+                                                className="nav-btn"
+                                            >
+                                                <span>Non-Tech Domains</span>
+                                                {/* SVG Here */}
+                                            </motion.button>
+                                        </div>
                                     </div>
-                                </div>
-                            </motion.div>
+                                </motion.div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    {/* TECH DOMAINS SECTION */}
+                    <div id="tech-domains" className="domains-section">
+                        <h2 className="section-heading fade-up">Tech Domains</h2>
 
-                {/* Tech Domains */}
-                <div id="tech-domains" className="domains-section">
-                    <h2 className="section-heading fade-up">Tech Domains</h2>
-                    <div className="leads-grid">
-                        {techDomains.map((domain, index) => (
-                            <DomainCard key={domain.id} domain={domain} index={index} />
-                        ))}
+                        {/* REPLACED Tailwind Grid with Theme 'leads-grid' */}
+                        <div className="leads-grid">
+                            {techDomains.map((domain, index) => (
+                                <DomainCard key={domain.id} domain={domain} index={index} />
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* NON-TECH DOMAINS SECTION */}
+                    <div id="non-tech-domains" className="domains-section mt-24 mb-16">
+                        <h2 className="section-heading fade-up">Non-Tech Domains</h2>
+
+                        {/* Marketing Subcategory */}
+                        <div className="mt-12">
+                            <h3 className="text-3xl font-bold text-center mb-8 text-white/90 fade-up">
+                                Marketing
+                            </h3>
+                            <div className="leads-grid">
+                                {nonTechDomains
+                                    .filter(d => d.subcategory === 'marketing')
+                                    .map((domain, index) => (
+                                        <DomainCard key={domain.id} domain={domain} index={index} />
+                                    ))
+                                }
+                            </div>
+                        </div>
+
+                        {/* Creative Media & Design Subcategory */}
+                        <div className="mt-16">
+                            <h3 className="text-3xl font-bold text-center mb-8 text-white/90 fade-up">
+                                Creative Media & Design
+                            </h3>
+                            <div className="leads-grid">
+                                {nonTechDomains
+                                    .filter(d => d.subcategory === 'creative')
+                                    .map((domain, index) => (
+                                        <DomainCard key={domain.id} domain={domain} index={index} />
+                                    ))
+                                }
+                            </div>
+                        </div>
                     </div>
                 </div>
 

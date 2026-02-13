@@ -4,6 +4,15 @@
    1. CORE VARIABLES & PALETTE
    ========================================= */
 :root {
+  --gold-primary: #C5A059;
+  /* Lannister Gold */
+  --gold-highlight: #F4E4BC;
+  /* Light Gold */
+  --gold-shadow: #8A6E2F;
+  /* Dark Gold */
+  --obsidian-dark: #050505;
+  /* Deep Black */
+  --obsidian-glass: rgba(10, 12, 16, 0.75);
   --gold-primary: #C5A059;       
   --gold-highlight: #F4E4BC;     
   --gold-shadow: #8A6E2F;        
@@ -14,7 +23,8 @@
   --transition-slow: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-body, .body {
+body,
+.body {
   background: radial-gradient(circle at center, #1F2833 0%, #000000 85%);
   color: #e5e5e5;
   font-family: 'Cinzel', serif;
@@ -25,6 +35,29 @@ body, .body {
 /* =========================================
    2. REALISTIC SNOW ANIMATION
    ========================================= */
+.hero-section {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  /* Enables split layout */
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  z-index: 10;
+}
+
+/* LEFT SIDE: The Throne */
+.hero-visual-side {
+  flex: 1;
+  /* Takes 50% width */
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
 .snow-container {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     pointer-events: none; z-index: 1;
@@ -36,36 +69,86 @@ body, .body {
 .small-flake { font-size: 0.8rem; filter: blur(1.5px); opacity: 0.4; }
 .large-flake { font-size: 1.4rem; filter: blur(0px); opacity: 0.8; }
 
-@keyframes fall {
-    0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
-    10% { opacity: 1; } 85% { opacity: 1; }
-    100% { transform: translateY(110vh) translateX(25px) rotate(200deg); opacity: 0; }
+/* RIGHT SIDE: The Content Box */
+.hero-content-side {
+  margin-top: 2rem;
+  flex: 1;
+  /* Takes 50% width */
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
 }
 
-/* =========================================
-   3. HERO LAYOUT & SHIFT
-   ========================================= */
-.hero-section {
-  width: 100%; min-height: 100vh; display: flex; align-items: center; justify-content: center;
-  position: relative; z-index: 10;
-}
-.hero-visual-side, .hero-content-side {
-  flex: 1; height: 100vh; display: flex; align-items: center; justify-content: center;
-}
+/* The Glowing Iron Throne */
 .iron-throne {
-  position: relative; width: 80%; max-width: 600px;
-  filter: drop-shadow(0 0 30px rgba(197, 160, 89, 0.4));
-  animation: throneEnter 1.5s var(--transition-slow) forwards, throneHover 6s ease-in-out infinite 1.5s;
+  position: relative;
+  width: 80%;
+  max-width: 600px;
+  height: auto;
+  object-fit: contain;
+  opacity: 0;
+
+  /* Entrance + Float Animation */
+  animation:
+    throneEnter 1.5s var(--transition-slow) forwards,
+    throneHover 6s ease-in-out infinite 1.5s;
+
+  /* Golden Glow Effect */
+  filter: drop-shadow(0 0 30px rgba(197, 160, 89, 0.4)) drop-shadow(0 0 60px rgba(197, 160, 89, 0.2));
+  transition: filter 0.5s ease;
+}
+
+/* Brighter glow on hover */
+.hero-visual-side:hover .iron-throne {
+  filter: drop-shadow(0 0 40px rgba(197, 160, 89, 0.8)) drop-shadow(0 0 80px rgba(197, 160, 89, 0.4));
+}
+
+/* Dragon (Global Layer) */
+.dragon {
+  position: absolute;
+  top: 5%;
+  right: -20%;
+  width: 400px;
+  opacity: 0;
+  animation:
+    dragonEnter 2.5s var(--transition-slow) forwards,
+    dragonFloat 6s ease-in-out infinite 2.5s;
+  z-index: 1;
+  pointer-events: none;
 }
 .hero-visual-side:hover .iron-throne { filter: drop-shadow(0 0 40px rgba(197, 160, 89, 0.8)); }
 
 .hero-box {
   background: var(--obsidian-glass); backdrop-filter: blur(2px) saturate(120%);
   border: 1px solid var(--glass-border);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(0, 0, 0, 0.5);
-  border-radius: 12px; padding: 4rem 3rem; width: 90%; max-width: 650px;
-  position: relative; overflow: hidden; 
-  transform: translateX(38px); 
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.8),
+    inset 0 0 30px rgba(0, 0, 0, 0.5),
+    0 0 25px rgba(197, 160, 89, 0.15);
+  border-radius: 12px;
+  padding: 4rem 3rem;
+
+  /* Sizing for split layout */
+  width: 90%;
+  max-width: 650px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  transform: skewX(-25deg);
+  animation: glassShine 8s infinite;
+  pointer-events: none;
 }
 
 /* =========================================
@@ -98,20 +181,19 @@ body, .body {
 @keyframes fadeMotto { 0% { opacity: 0.8; } 100% { opacity: 1; } }
 
 .hero-title {
-  font-size: 3rem; 
-  font-weight: 900; 
-  text-transform: uppercase; 
-  letter-spacing: 5px; 
-  margin-bottom: 1rem; 
-  background: linear-gradient(to bottom, var(--gold-highlight), var(--gold-primary), var(--gold-shadow));
-  
-  -webkit-background-clip: text; 
+  font-size: 3.5rem;
+  /* Slightly smaller for split layout */
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-bottom: 1rem;
+  font-family: 'Cinzel', serif;
+  background: linear-gradient(to bottom, var(--gold-highlight) 0%, var(--gold-primary) 40%, var(--gold-shadow) 100%);
+  -webkit-background-clip: text;
   background-clip: text;
   
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 4px 0px rgba(0,0,0,0.5));
-  
-  white-space: nowrap; 
+  filter: drop-shadow(0 4px 0px rgba(0, 0, 0, 0.5));
 }
 
 .hero-subtitle {
@@ -133,11 +215,18 @@ body, .body {
   gap: 3rem; 
 }
 
-.apply-btn-sheen {
-  background: rgba(0,0,0,0.4); color: var(--gold-primary);
-  font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.2rem; letter-spacing: 3px;
-  padding: 1rem 3rem; border: 1px solid var(--gold-primary); position: relative; overflow: hidden;
-  cursor: pointer; transition: all 0.3s ease; z-index: 1;
+.apply-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--gold-primary);
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s var(--transition-slow);
 }
 .apply-btn-sheen::after {
     content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
@@ -162,6 +251,13 @@ body, .body {
 .nav-btn:hover {
   border-color: var(--gold-primary); color: var(--gold-highlight);
   background: rgba(197, 160, 89, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.nav-icon {
+  width: 18px;
+  height: 18px;
 }
 
 /* =========================================
@@ -179,44 +275,270 @@ body, .body {
   gap: 12px; 
   padding: 0 2rem;
 }
+
+/* Individual Domain Card - Default State (Dark with visible orange gradient) */
 .lead-card {
-  background: rgb(0, 0, 0); backdrop-filter: blur(10px);
-  border: 1px solid var(--glass-border); border-radius: 8px;
-  height: 280px; 
-  width: 100%;
-  padding: 1.5rem; 
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center; 
-  transition: 0.4s; cursor: pointer;
+  /* More visible orange gradient inside */
+  background: linear-gradient(135deg,
+      rgba(20, 10, 5, 0.98) 0%,
+      rgba(50, 30, 15, 0.95) 20%,
+      rgba(80, 50, 25, 0.9) 40%,
+      rgba(100, 60, 30, 0.88) 50%,
+      rgba(80, 50, 25, 0.9) 60%,
+      rgba(50, 30, 15, 0.95) 80%,
+      rgba(20, 10, 5, 0.98) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
+
+  /* 3D depth effect */
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+    inset 0 0 60px rgba(197, 160, 89, 0.08);
+  transform-style: preserve-3d;
 }
+
+/* Smooth inner glow effect */
+.lead-card::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 80%;
+  background: radial-gradient(circle,
+      rgba(197, 160, 89, 0.15) 0%,
+      rgba(197, 160, 89, 0.08) 40%,
+      transparent 70%);
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(30px);
+}
+
+/* HOVER STATE: Enhanced gradient with glow */
 .lead-card:hover {
-  background: var(--gold-primary); border-color: var(--gold-highlight);
-  transform: translateY(-5px);
-  box-shadow: 0 0 35px rgba(197, 160, 89, 0.6);
-  z-index: 2; 
+  /* Smooth orange gradient fill */
+  background: linear-gradient(135deg,
+      #C5A059 0%,
+      #F4E4BC 50%,
+      #C5A059 100%);
+  border-color: var(--gold-highlight);
+  transform: translateY(-12px) scale(1.02);
+  backdrop-filter: none;
+
+  /* Enhanced 3D glow effect */
+  box-shadow:
+    0 20px 60px rgba(197, 160, 89, 0.6),
+    0 10px 30px rgba(197, 160, 89, 0.4),
+    0 0 40px rgba(197, 160, 89, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Activate inner glow on hover */
+.lead-card:hover::before {
+  opacity: 1;
 }
 .lead-title {
-  font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 700;
-  color: var(--gold-highlight); margin-top: 1rem; text-align: center; transition: 0.3s;
-  line-height: 1.3;
+  font-family: 'Cinzel', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--gold-highlight);
+  margin-top: 1rem;
+  letter-spacing: 1px;
+  text-align: center;
+  transition: all 0.4s ease;
+  text-shadow: 0 2px 10px rgba(197, 160, 89, 0.3);
+  position: relative;
+  z-index: 2;
+}
+
+/* HOVER STATE: Title stays visible with white color and strong shadow */
+.lead-card:hover .lead-title {
+  color: #ffffff;
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(0, 0, 0, 0.3);
+  font-weight: 900;
 }
 .lead-card:hover .lead-title { color: #050505; text-shadow: none; }
 .domain-icon { width: 80px; height: 80px; transition: 0.3s; filter: drop-shadow(0 0 10px rgba(197, 160, 89, 0.4)); object-fit: contain;}
 .lead-card:hover .domain-icon { transform: scale(1.1); filter: brightness(0); }
 
-/* Animation Utils */
-@keyframes throneEnter { to { opacity: 1; } }
-@keyframes throneHover { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-.fade-up, .fade-down, .zoom-in { opacity: 0; transition: 0.8s; }
-.fade-up { transform: translateY(40px); }
-.fade-down { transform: translateY(-40px); }
-.zoom-in { transform: scale(0.9); }
-.visible { opacity: 1; transform: translate(0,0) scale(1); }
+.icon-container {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  transition: transform 0.4s ease;
+}
+
+/* Domain Icon - Default State */
+.domain-icon {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 15px rgba(197, 160, 89, 0.5));
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* HOVER STATE: Icon stays visible with enhanced orange glow and scale */
+.lead-card:hover .domain-icon {
+  transform: scale(1.15) translateZ(10px);
+  /* Keep icon visible with enhanced orange/gold glow */
+  filter:
+    drop-shadow(0 0 20px rgba(197, 160, 89, 0.9)) drop-shadow(0 0 10px rgba(244, 228, 188, 0.7)) brightness(0.9) saturate(1.2);
+}
+
+/* =========================================
+   6. ANIMATION KEYFRAMES
+   ========================================= */
+@keyframes throneEnter {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes throneHover {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes dragonEnter {
+  to {
+    right: 5%;
+    opacity: 1;
+  }
+}
+
+@keyframes dragonFloat {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes glassShine {
+  0% {
+    left: -150%;
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    left: 150%;
+    opacity: 0;
+  }
+}
+
+/* Utilities */
+.fade-up,
+.fade-down,
+.zoom-in {
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-up {
+  transform: translateY(40px);
+}
+
+.fade-down {
+  transform: translateY(-40px);
+}
+
+.zoom-in {
+  transform: scale(0.9);
+}
+
+.visible {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
 
 @media (max-width: 968px) {
-  .hero-section { flex-direction: column-reverse; padding-top: 60px; height: auto; }
-  .hero-visual-side, .hero-content-side { width: 100%; height: auto; padding: 2rem 1rem; }
-  .hero-box { width: 100%; transform: none; margin-right: 0; }
-  .hero-title { font-size: 2.2rem; white-space: normal; } 
-  .house-motto { font-size: 1.2rem; top: 1rem; }
+
+  /* Stack Hero Section */
+  .hero-section {
+    flex-direction: column-reverse;
+    /* Box on top, Throne below */
+    padding-top: 60px;
+    height: auto;
+  }
+
+  .hero-visual-side,
+  .hero-content-side {
+    width: 100%;
+    flex: none;
+    height: auto;
+    padding: 2rem 1rem;
+  }
+
+  .hero-content-side {
+    padding-bottom: 0;
+    /* Remove extra space between box and throne */
+  }
+
+  .hero-visual-side {
+    height: 400px;
+    /* Space for throne */
+  }
+
+  .hero-box {
+    width: 100%;
+    padding: 3rem 1.5rem;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .iron-throne {
+    width: 60%;
+    min-width: 280px;
+  }
+
+  .dragon {
+    width: 180px;
+    top: 2%;
+    right: -10px;
+    opacity: 0.8;
+  }
+
+  /* Grid Adjustments */
+  .leads-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
 }

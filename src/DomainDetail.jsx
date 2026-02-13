@@ -2,25 +2,101 @@ import React, { useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./DomainDetail.css";
+import { gsap } from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+gsap.registerPlugin(ScrollToPlugin);
 
 const domainsData = {
-    "marketing-pr-event-management": {
-        name: "Marketing PR & Event Management",
-        icon: "/Images/Logo/Marketing.png",
+    // Tech Domains
+    "iot": {
+        name: "IOT",
+        icon: "/Images/Logo/IoT&Embedded.png",
         criteria: [
-            "Strong communication and interpersonal skills",
-            "Experience in event planning and coordination",
-            "Creative thinking and problem-solving abilities",
-            "Proficiency in social media marketing",
-            "Ability to work under pressure and meet deadlines",
+            "Familiar with basic communication protocols",
+            "Good understanding of how microcontrollers work in a system",
+            "Problem-solving mindset",
+            "Strong grasp on hardware and software integration of fundamental systems",
         ],
         domainLead: {
-            name: "Priya Sharma",
-            phone: "+91 98765 43210",
+            name: "Dibyo Sundar Basu",
+            phone: "+91 824 070 2288",
         },
         assistantLead: {
-            name: "Rahul Verma",
-            phone: "+91 98765 43211",
+            name: "Samridhya Mukherjee & Saurav Jena",
+            phone: "+91 70036 56695 / +91 7656 072 305",
+        },
+    },
+    "embedded-systems": {
+        name: "Embedded Systems",
+        icon: "/Images/Logo/IoT&Embedded.png",
+        criteria: [
+            "Familiar with basic communication protocols",
+            "Good understanding of how microcontrollers work in a system",
+            "Problem-solving mindset",
+            "Strong grasp on hardware and software integration of fundamental systems",
+        ],
+        domainLead: {
+            name: "Suprit Mangaraj",
+            phone: "+91 79 7828 0261",
+        },
+        assistantLead: {
+            name: "Saurav Jena & Utsah Puspalak",
+            phone: "+91 7656 072 305",
+        },
+    },
+    "cloud-computing": {
+        name: "Cloud Computing",
+        icon: "/Images/Logo/CloudComputing.png",
+        criteria: [
+            "Understanding of cloud basics",
+            "Familiarity with GitHub",
+            "Interest in learning cloud platforms and services",
+        ],
+        domainLead: {
+            name: "Jagan Kumar Hotta",
+            phone: "Contact via E-Labs",
+        },
+        assistantLead: {
+            name: "Ritu Shree",
+            phone: "Contact via E-Labs",
+        },
+    },
+    "game-development": {
+        name: "Game Development",
+        icon: "/Images/Logo/gamedev.png",
+        criteria: [
+            "Know the basics of game development",
+            "Understanding of OOPS (C#)",
+            "Familiarity with Unity",
+            "Basic understanding of games and their genres",
+            "Deep knowledge not required - basics should be researched",
+        ],
+        domainLead: {
+            name: "Nayantika",
+            phone: "+91 89617 49477",
+        },
+        assistantLead: {
+            name: "Swatha",
+            phone: "+91 90314 76070",
+        },
+    },
+    "android-development": {
+        name: "Android Development",
+        icon: "/Images/Logo/AppDevelopment.png",
+        criteria: [
+            "Basic knowledge of Flutter, Kotlin, or Java (knowing any one is enough)",
+            "Interest in Android/App development and willingness to learn if resources are provided",
+            "Good problem-solving mindset and eagerness to improve",
+            "🌱 Opportunity: Students who perform well can contribute to our open-source projects like KIITO App and MapKIIT",
+        ],
+        domainLead: {
+            name: "Abinash Mohanty",
+            phone: "+91 8455894907",
+        },
+        assistantLead: {
+            name: "Yogisha Rani",
+            phone: "+91 7667408570",
         },
     },
     "web-development": {
@@ -34,221 +110,227 @@ const domainsData = {
             "Problem-solving and debugging skills",
         ],
         domainLead: {
-            name: "Amit Kumar",
-            phone: "+91 98765 43212",
+            name: "Abinash Mohanty",
+            phone: "+91 8455894907",
         },
         assistantLead: {
-            name: "Sneha Patel",
-            phone: "+91 98765 43213",
+            name: "Raghav Sinha",
+            phone: "+91 72678 44718",
         },
     },
-    "cloud-computing": {
-        name: "Cloud Computing",
-        icon: "/Images/Logo/CloudComputing.png",
-        criteria: [
-            "Knowledge of AWS, Azure, or Google Cloud Platform",
-            "Understanding of cloud architecture and services",
-            "Experience with containerization (Docker, Kubernetes)",
-            "Familiarity with DevOps practices",
-            "Strong analytical and troubleshooting skills",
-        ],
-        domainLead: {
-            name: "Vikram Singh",
-            phone: "+91 98765 43214",
-        },
-        assistantLead: {
-            name: "Ananya Reddy",
-            phone: "+91 98765 43215",
-        },
-    },
-    "iot-embedded-systems": {
-        name: "IoT & Embedded Systems",
-        icon: "/Images/Logo/IoT&Embedded.png",
-        criteria: [
-            "Knowledge of microcontrollers (Arduino, Raspberry Pi)",
-            "Understanding of sensor integration and protocols",
-            "Programming skills in C/C++ or Python",
-            "Experience with circuit design and hardware",
-            "Problem-solving and hands-on project experience",
-        ],
-        domainLead: {
-            name: "Arjun Mehta",
-            phone: "+91 98765 43216",
-        },
-        assistantLead: {
-            name: "Kavya Iyer",
-            phone: "+91 98765 43217",
-        },
-    },
-    "content-writing": {
-        name: "Content Writing",
-        icon: "/Images/Logo/ContentWriting.png",
-        criteria: [
-            "Excellent writing and grammar skills",
-            "Creativity and storytelling abilities",
-            "Research and fact-checking capabilities",
-            "Understanding of SEO principles",
-            "Ability to adapt writing style for different audiences",
-        ],
-        domainLead: {
-            name: "Neha Gupta",
-            phone: "+91 98765 43218",
-        },
-        assistantLead: {
-            name: "Rohan Das",
-            phone: "+91 98765 43219",
-        },
-    },
-    "android-development": {
-        name: "Android Development",
-        icon: "/Images/Logo/AppDevelopment.png",
-        criteria: [
-            "Proficiency in Java or Kotlin",
-            "Experience with Android Studio and SDK",
-            "Understanding of Material Design guidelines",
-            "Knowledge of RESTful APIs and JSON",
-            "Problem-solving and debugging skills",
-        ],
-        domainLead: {
-            name: "Karthik Nair",
-            phone: "+91 98765 43220",
-        },
-        assistantLead: {
-            name: "Divya Menon",
-            phone: "+91 98765 43221",
-        },
-    },
-    "data-analytics": {
-        name: "Data Analytics",
-        icon: "/Images/Logo/DataAnalytics.png",
-        criteria: [
-            "Proficiency in Python, R, or SQL",
-            "Experience with data visualization tools (Tableau, Power BI)",
-            "Understanding of statistical analysis and modeling",
-            "Knowledge of Excel and data manipulation",
-            "Analytical thinking and attention to detail",
-        ],
-        domainLead: {
-            name: "Sanjay Joshi",
-            phone: "+91 98765 43222",
-        },
-        assistantLead: {
-            name: "Pooja Agarwal",
-            phone: "+91 98765 43223",
-        },
-    },
-    "photography-video": {
-        name: "Photography & Video",
-        icon: "/Images/Logo/PhotoVideoEditing.png",
-        criteria: [
-            "Experience with DSLR/mirrorless cameras",
-            "Proficiency in photo/video editing software (Photoshop, Premiere Pro)",
-            "Understanding of composition and lighting",
-            "Creative vision and storytelling through visuals",
-            "Portfolio showcasing previous work",
-        ],
-        domainLead: {
-            name: "Aditya Rao",
-            phone: "+91 98765 43224",
-        },
-        assistantLead: {
-            name: "Riya Kapoor",
-            phone: "+91 98765 43225",
-        },
-    },
-    java: {
+    "java": {
         name: "Java",
         icon: "/Images/Logo/Java.png",
         criteria: [
-            "Strong knowledge of Java programming",
-            "Understanding of OOP concepts",
-            "Experience with Java frameworks (Spring, Hibernate)",
-            "Knowledge of data structures and algorithms",
-            "Problem-solving and coding skills",
+            "Strong core Java fundamentals",
+            "Good programming and problem-solving skills",
+            "Clear communication skills and confident in explaining concepts",
+            "Interest in teaching peers",
+            "Familiarity with DSA using Java will be an added advantage",
         ],
         domainLead: {
-            name: "Suresh Babu",
-            phone: "+91 98765 43226",
+            name: "Arpita Som",
+            phone: "+91 89876 69431",
         },
         assistantLead: {
-            name: "Meera Krishnan",
-            phone: "+91 98765 43227",
-        },
-    },
-    "ai-ml": {
-        name: "AI/ML",
-        icon: "/Images/Logo/AIML.png",
-        criteria: [
-            "Proficiency in Python and ML libraries (TensorFlow, PyTorch, scikit-learn)",
-            "Understanding of machine learning algorithms",
-            "Experience with data preprocessing and feature engineering",
-            "Knowledge of neural networks and deep learning",
-            "Strong mathematical and analytical skills",
-        ],
-        domainLead: {
-            name: "Dr. Rajesh Kumar",
-            phone: "+91 98765 43228",
-        },
-        assistantLead: {
-            name: "Shruti Desai",
-            phone: "+91 98765 43229",
+            name: "Divyansh Upadhyay & Ayush Chakraborty",
+            phone: "+91 90739 11397",
         },
     },
     "cyber-security": {
         name: "Cyber Security",
         icon: "/Images/Logo/CyberSecurity.png",
         criteria: [
-            "Understanding of network security and protocols",
-            "Knowledge of ethical hacking and penetration testing",
-            "Familiarity with security tools (Wireshark, Metasploit)",
-            "Understanding of cryptography and encryption",
-            "Problem-solving and analytical thinking",
+            "Basic knowledge of Linux",
+            "Familiarity with at least one scripting language (preferably Python or Bash)",
+            "Interest in cybersecurity",
+            "Awareness of relevant cybersecurity news/events",
         ],
         domainLead: {
-            name: "Varun Malhotra",
-            phone: "+91 98765 43230",
+            name: "Swayam Mishra",
+            phone: "Contact via E-Labs",
         },
         assistantLead: {
-            name: "Ishita Saxena",
-            phone: "+91 98765 43231",
+            name: "Shashank Mishra",
+            phone: "Contact via E-Labs",
         },
     },
-    "graphics-designing-ui-ux": {
-        name: "Graphics Designing & UI/UX",
+    "ai-ml": {
+        name: "AI/ML",
+        icon: "/Images/Logo/AIML.png",
+        criteria: [
+            "Basic Python programming",
+            "Basic Statistics and Probability",
+            "Interest in machine learning and artificial intelligence",
+        ],
+        domainLead: {
+            name: "Arkabrata Roy",
+            phone: "+91 90511 55639",
+        },
+        assistantLead: {
+            name: "Sarthakbrata Halder",
+            phone: "Contact via E-Labs",
+        },
+    },
+    "data-analytics": {
+        name: "Data Analytics",
+        icon: "/Images/Logo/DataAnalytics.png",
+        criteria: [
+            "Basic understanding of data analysis",
+            "Good knowledge of Excel",
+            "Basic SQL for data extraction",
+            "Interest in learning and working with data",
+        ],
+        domainLead: {
+            name: "Anusha Sanghai & Nishant Dudhe",
+            phone: "+91 6353 364 330",
+        },
+        assistantLead: {
+            name: "Kaustav Ghosh",
+            phone: "Contact via E-Labs",
+        },
+    },
+    // Non-Tech Domains - Marketing
+    "marketing": {
+        name: "Marketing",
+        icon: "/Images/Logo/Marketing.png",
+        criteria: [
+            "Strong communication skills",
+            "Basic prior knowledge or experience in handling marketing activities",
+            "Responsible and proactive attitude",
+            "Capable of contributing effectively to planning and execution",
+        ],
+        domainLead: {
+            name: "Priyanshu Aryan Panda",
+            phone: "+91 87634 18626",
+        },
+        assistantLead: {
+            name: "Shreyas",
+            phone: "+91 94374 71920",
+        },
+    },
+    "event-management": {
+        name: "Event Management",
+        icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E🎉%3C/text%3E%3C/svg%3E",
+        criteria: [
+            "Strong communication skills",
+            "Basic prior knowledge or experience in event management",
+            "Responsible and proactive attitude",
+            "Capable of contributing effectively to planning and execution",
+        ],
+        domainLead: {
+            name: "Priyanshu Aryan Panda",
+            phone: "+91 87635 18626",
+        },
+        assistantLead: {
+            name: "Anwesa Bose",
+            phone: "+91 6290 550 622",
+        },
+    },
+    "entrepreneurship-startup": {
+        name: "Entrepreneurship and Startup",
+        icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E🚀%3C/text%3E%3C/svg%3E",
+        criteria: [
+            "Interest in entrepreneurship and startups",
+            "Creative and innovative thinking",
+            "Strong communication and networking skills",
+            "Willingness to learn about business development",
+        ],
+        domainLead: {
+            name: "Prajjwal",
+            phone: "+91 63064 24579",
+        },
+        assistantLead: {
+            name: "Assistant Lead",
+            phone: "Contact via E-Labs",
+        },
+    },
+    // Non-Tech Domains - Creative Media & Design
+    "photography": {
+        name: "Photography",
+        icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E📷%3C/text%3E%3C/svg%3E",
+        criteria: [
+            "Basic understanding of camera fundamentals (ISO, aperture, shutter speed) and shooting modes",
+            "Knowledge of composition basics (rule of thirds, framing, leading lines, lighting)",
+            "Familiarity with basic photo editing tools (Lightroom/Snapseed/Photoshop)",
+            "Willingness to learn, practice regularly, and improve photography skills",
+        ],
+        domainLead: {
+            name: "Suchandra Das",
+            phone: "+91 96117 87183",
+        },
+        assistantLead: {
+            name: "Pratichi Mohapatra",
+            phone: "Contact via E-Labs",
+        },
+    },
+    "video-editing": {
+        name: "Video Editing",
+        icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E🎬%3C/text%3E%3C/svg%3E",
+        criteria: [
+            "Basic knowledge of any editing software (CapCut/Premiere Pro/DaVinci Resolve)",
+            "Understanding of simple cuts, text, music, beat sync, basic colour grading, and aspect ratios",
+            "Awareness of social media trending reels",
+            "Willingness to learn, practice regularly, and improve editing skills",
+        ],
+        domainLead: {
+            name: "Shoveet Kumar Behera & Priya Kumari",
+            phone: "+91 93375 27240 / +91 83880 49310",
+        },
+        assistantLead: {
+            name: "Assistant Lead",
+            phone: "Contact via E-Labs",
+        },
+    },
+    "content-writing": {
+        name: "Content Writing",
+        icon: "/Images/Logo/ContentWriting.png",
+        criteria: [
+            "English writing skills",
+            "Ability to write social media captions and emails",
+            "Candidates should preferably carry their own written samples",
+        ],
+        domainLead: {
+            name: "Anand Jadon",
+            phone: "+91 88658 00347",
+        },
+        assistantLead: {
+            name: "Prisha Sekhawat",
+            phone: "Contact via E-Labs",
+        },
+    },
+    "ui-ux": {
+        name: "UI/UX",
         icon: "/Images/Logo/UIUX.png",
         criteria: [
-            "Proficiency in design tools (Figma, Adobe XD, Illustrator)",
-            "Understanding of design principles and color theory",
-            "Experience with user research and wireframing",
-            "Knowledge of responsive and accessible design",
-            "Creative portfolio showcasing design work",
+            "Basic knowledge in Figma",
+            "Understanding of autolayouts, constraints, frame resizing",
+            "Familiarity with basic UI/UX functions and tools",
         ],
         domainLead: {
-            name: "Tanvi Shah",
-            phone: "+91 98765 43232",
+            name: "Anushka Singh",
+            phone: "+91 7488 092 129",
         },
         assistantLead: {
-            name: "Nikhil Bhatt",
-            phone: "+91 98765 43233",
+            name: "Soumya Mohapatra",
+            phone: "Contact via E-Labs",
         },
     },
-    "game-development": {
-        name: "Game Development",
-        icon: "/Images/Logo/gamedev.png",
+    "graphic-designing": {
+        name: "Graphic Designing",
+        icon: "/Images/Logo/GD.png",
         criteria: [
-            "Proficiency in Unity or Unreal Engine",
-            "Programming skills in C# or C++",
-            "Understanding of game design principles",
-            "Experience with 2D/3D graphics and animation",
-            "Creative thinking and problem-solving abilities",
+            "Basic knowledge in Figma/Canva/Photoshop/Illustrator/Da Vinci Resolve (any one is acceptable)",
+            "Creative thinking and design sense",
+            "Willingness to learn and improve design skills",
         ],
         domainLead: {
-            name: "Aarav Chopra",
-            phone: "+91 98765 43234",
+            name: "Snigdha Dutta",
+            phone: "Contact via E-Labs",
         },
         assistantLead: {
-            name: "Simran Kaur",
-            phone: "+91 98765 43235",
+            name: "Soumya Mohapatra",
+            phone: "+91 70085 34142",
         },
     },
 };
@@ -257,6 +339,11 @@ const DomainDetail = () => {
     const { domainId } = useParams();
     const navigate = useNavigate();
     const domain = domainsData[domainId];
+
+    // GSAP Scroll Reset
+    useEffect(() => {
+        gsap.to(window, { duration: 0.5, scrollTo: 0, ease: "power2.out" });
+    }, [domainId]);
 
     useEffect(() => {
         // Initialize particles.js
@@ -334,7 +421,7 @@ const DomainDetail = () => {
     }
 
     const handleApplyNow = () => {
-        alert(`Application for ${domain.name} coming soon!`);
+        window.open('https://forms.gle/xSszBVcYnhHnEp7c8', '_blank');
     };
 
     return (
@@ -417,30 +504,54 @@ const DomainDetail = () => {
                         {/* Domain Lead */}
                         <div className="lead-card fade-left-domain">
                             <h3 className="lead-title">Domain Lead</h3>
-                            <div className="lead-info">
-                                <p className="info-item">
-                                    <span className="info-label">Name:</span>{" "}
-                                    {domain.domainLead.name}
-                                </p>
-                                <p className="info-item">
-                                    <span className="info-label">Phone:</span>{" "}
-                                    {domain.domainLead.phone}
-                                </p>
+                            <div className="leads-list">
+                                {domain.domainLead.name.split('&').map((name, index) => {
+                                    const phones = domain.domainLead.phone.split('/');
+                                    const phone = phones[index] || phones[0]; // Fallback to first phone if matching one not found
+                                    return (
+                                        <div key={index} className="lead-info-block" style={{
+                                            marginBottom: index !== domain.domainLead.name.split('&').length - 1 ? '1.5rem' : '0',
+                                            paddingBottom: index !== domain.domainLead.name.split('&').length - 1 ? '1.5rem' : '0',
+                                            borderBottom: index !== domain.domainLead.name.split('&').length - 1 ? '1px solid rgba(197, 160, 89, 0.2)' : 'none'
+                                        }}>
+                                            <p className="info-item">
+                                                <span className="info-label">Name:</span>{" "}
+                                                {name.trim()}
+                                            </p>
+                                            <p className="info-item">
+                                                <span className="info-label">Phone:</span>{" "}
+                                                {phone.trim()}
+                                            </p>
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </div>
 
                         {/* Assistant Lead */}
                         <div className="lead-card fade-right-domain">
                             <h3 className="lead-title">Assistant Lead</h3>
-                            <div className="lead-info">
-                                <p className="info-item">
-                                    <span className="info-label">Name:</span>{" "}
-                                    {domain.assistantLead.name}
-                                </p>
-                                <p className="info-item">
-                                    <span className="info-label">Phone:</span>{" "}
-                                    {domain.assistantLead.phone}
-                                </p>
+                            <div className="leads-list">
+                                {domain.assistantLead.name.split('&').map((name, index) => {
+                                    const phones = domain.assistantLead.phone.split('/');
+                                    const phone = phones[index] || phones[0]; // Fallback to first phone
+                                    return (
+                                        <div key={index} className="lead-info-block" style={{
+                                            marginBottom: index !== domain.assistantLead.name.split('&').length - 1 ? '1.5rem' : '0',
+                                            paddingBottom: index !== domain.assistantLead.name.split('&').length - 1 ? '1.5rem' : '0',
+                                            borderBottom: index !== domain.assistantLead.name.split('&').length - 1 ? '1px solid rgba(197, 160, 89, 0.2)' : 'none'
+                                        }}>
+                                            <p className="info-item">
+                                                <span className="info-label">Name:</span>{" "}
+                                                {name.trim()}
+                                            </p>
+                                            <p className="info-item">
+                                                <span className="info-label">Phone:</span>{" "}
+                                                {phone.trim()}
+                                            </p>
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </div>
                     </div>
