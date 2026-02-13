@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tsparticles/engine": "^3.9.1",
+    "@tsparticles/react": "^3.0.0",
     "framer-motion": "^12.34.0",
     "particles.js": "^2.0.0",
     "react": "^19.2.0",
