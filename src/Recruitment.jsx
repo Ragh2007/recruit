@@ -284,7 +284,7 @@ const Recruitment = () => {
                         {/* Marketing Subcategory */}
                         <div className="mt-12">
                             <h3 className="text-3xl font-bold text-center mb-8 text-white/90 fade-up">
-                                Marketing
+                                SOCIAL MEDIA and PR
                             </h3>
                             <div className="leads-grid">
                                 {nonTechDomains
@@ -313,15 +313,7 @@ const Recruitment = () => {
                     </div>
                 </div>
 
-                {/* Non-Tech Domains */}
-                <div id="non-tech-domains" className="domains-section mt-24 mb-16">
-                    <h2 className="section-heading fade-up">Non-Tech Domains</h2>
-                    <div className="leads-grid">
-                        {nonTechDomains.map((domain, index) => (
-                            <DomainCard key={domain.id} domain={domain} index={index} />
-                        ))}
-                    </div>
-                </div>
+                
 
                 <motion.p
                     initial={{ opacity: 0 }}
