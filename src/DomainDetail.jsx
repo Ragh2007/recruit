@@ -421,7 +421,7 @@ const DomainDetail = () => {
     }
 
     const handleApplyNow = () => {
-        alert(`Application for ${domain.name} coming soon!`);
+        window.open('https://forms.gle/xSszBVcYnhHnEp7c8', '_blank');
     };
 
     return (

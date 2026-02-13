@@ -156,7 +156,7 @@ const Recruitment = () => {
     }, []);
 
     const handleApplyNow = () => {
-        alert("Application form coming soon! Please check back later.");
+        window.open('https://forms.gle/xSszBVcYnhHnEp7c8', '_blank');
     };
 
     const handleDomainClick = (domainId) => {
