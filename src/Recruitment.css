@@ -4,11 +4,11 @@
    1. CORE VARIABLES & PALETTE
    ========================================= */
 :root {
-  --gold-primary: #C5A059;       /* Lannister Gold */
-  --gold-highlight: #F4E4BC;     /* Light Gold */
-  --gold-shadow: #8A6E2F;        /* Dark Gold */
-  --obsidian-dark: #050505;      /* Deep Black */
-  --obsidian-glass: rgba(10, 12, 16, 0.75);
+  --gold-primary: #C5A059;       
+  --gold-highlight: #F4E4BC;     
+  --gold-shadow: #8A6E2F;        
+  --obsidian-dark: #050505;      
+  --obsidian-glass: rgba(10, 12, 16, 0.80);
   --glass-border: rgba(197, 160, 89, 0.3);
   --steel-grey: #a0a0a0;
   --transition-slow: cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -23,395 +23,200 @@ body, .body {
 }
 
 /* =========================================
-   2. HERO SPLIT LAYOUT (50/50)
+   2. REALISTIC SNOW ANIMATION
+   ========================================= */
+.snow-container {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 1;
+}
+.ice-flake {
+    position: absolute; top: -20px; color: rgba(255, 255, 255, 0.6);
+    user-select: none; animation: fall linear infinite; filter: blur(0.5px);
+}
+.small-flake { font-size: 0.8rem; filter: blur(1.5px); opacity: 0.4; }
+.large-flake { font-size: 1.4rem; filter: blur(0px); opacity: 0.8; }
+
+@keyframes fall {
+    0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; } 85% { opacity: 1; }
+    100% { transform: translateY(110vh) translateX(25px) rotate(200deg); opacity: 0; }
+}
+
+/* =========================================
+   3. HERO LAYOUT & SHIFT
    ========================================= */
 .hero-section {
-  width: 100%;
-  min-height: 100vh;
-  display: flex; /* Enables split layout */
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  padding: 0;
-  z-index: 10;
+  width: 100%; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 10;
 }
-
-/* LEFT SIDE: The Throne */
-.hero-visual-side {
-  flex: 1; /* Takes 50% width */
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 2;
+.hero-visual-side, .hero-content-side {
+  flex: 1; height: 100vh; display: flex; align-items: center; justify-content: center;
 }
-
-/* RIGHT SIDE: The Content Box */
-.hero-content-side {
-  margin-top: 2rem;
-  flex: 1; /* Takes 50% width */
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 10;
-}
-
-/* The Glowing Iron Throne */
 .iron-throne {
-  position: relative;
-  width: 80%;
-  max-width: 600px;
-  height: auto;
-  object-fit: contain;
-  opacity: 0;
-  
-  /* Entrance + Float Animation */
-  animation: 
-    throneEnter 1.5s var(--transition-slow) forwards,
-    throneHover 6s ease-in-out infinite 1.5s;
-    
-  /* Golden Glow Effect */
-  filter: drop-shadow(0 0 30px rgba(197, 160, 89, 0.4)) 
-          drop-shadow(0 0 60px rgba(197, 160, 89, 0.2));
-  transition: filter 0.5s ease;
+  position: relative; width: 80%; max-width: 600px;
+  filter: drop-shadow(0 0 30px rgba(197, 160, 89, 0.4));
+  animation: throneEnter 1.5s var(--transition-slow) forwards, throneHover 6s ease-in-out infinite 1.5s;
 }
+.hero-visual-side:hover .iron-throne { filter: drop-shadow(0 0 40px rgba(197, 160, 89, 0.8)); }
 
-/* Brighter glow on hover */
-.hero-visual-side:hover .iron-throne {
-  filter: drop-shadow(0 0 40px rgba(197, 160, 89, 0.8)) 
-          drop-shadow(0 0 80px rgba(197, 160, 89, 0.4));
-}
-
-/* Dragon (Global Layer) */
-.dragon {
-  position: absolute;
-  top: 5%;
-  right: -20%;
-  width: 400px;
-  opacity: 0;
-  animation: 
-    dragonEnter 2.5s var(--transition-slow) forwards,
-    dragonFloat 6s ease-in-out infinite 2.5s;
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* =========================================
-   3. HERO GLASS BOX
-   ========================================= */
 .hero-box {
-  background: var(--obsidian-glass);
-  backdrop-filter: blur(2px) saturate(120%);
-  -webkit-backdrop-filter: blur(20px) saturate(120%);
+  background: var(--obsidian-glass); backdrop-filter: blur(2px) saturate(120%);
   border: 1px solid var(--glass-border);
-  box-shadow: 
-    0 20px 50px rgba(0, 0, 0, 0.8),
-    inset 0 0 30px rgba(0, 0, 0, 0.5),
-    0 0 25px rgba(197, 160, 89, 0.15);
-  border-radius: 12px;
-  padding: 4rem 3rem;
-  
-  /* Sizing for split layout */
-  width: 90%; 
-  max-width: 650px; 
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-box::before {
-  content: "";
-  position: absolute;
-  top: 0; left: -150%;
-  width: 100%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
-  transform: skewX(-25deg);
-  animation: glassShine 8s infinite;
-  pointer-events: none;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(0, 0, 0, 0.5);
+  border-radius: 12px; padding: 4rem 3rem; width: 90%; max-width: 650px;
+  position: relative; overflow: hidden; 
+  transform: translateX(38px); 
 }
 
 /* =========================================
-   4. TYPOGRAPHY & BUTTONS
+   4. TYPOGRAPHY & MOTTO
    ========================================= */
-.hero-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
+.house-motto {
+    position: absolute;
+    top: 2rem;       
+    left: 50%;       
+    transform: translateX(-50%);
+    z-index: 30;
+    
+    font-family: 'Cinzel', serif;
+    font-weight: 700; 
+    
+    /* UPDATED: Increased from 23px to 27px */
+    font-size: 27px; 
+    
+    color: rgba(255, 255, 255, 0.7); 
+    opacity: 1; 
+    
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+    
+    animation: fadeMotto 4s ease-in-out infinite alternate;
 }
+@keyframes fadeMotto { 0% { opacity: 0.8; } 100% { opacity: 1; } }
 
 .hero-title {
-  font-size: 3.5rem; /* Slightly smaller for split layout */
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  margin-bottom: 1rem;
-  font-family: 'Cinzel', serif;
-  background: linear-gradient(to bottom, var(--gold-highlight) 0%, var(--gold-primary) 40%, var(--gold-shadow) 100%);
-  -webkit-background-clip: text;
+  font-size: 3rem; 
+  font-weight: 900; 
+  text-transform: uppercase; 
+  letter-spacing: 5px; 
+  margin-bottom: 1rem; 
+  background: linear-gradient(to bottom, var(--gold-highlight), var(--gold-primary), var(--gold-shadow));
+  
+  -webkit-background-clip: text; 
   background-clip: text;
+  
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 4px 0px rgba(0,0,0,0.5));
+  
+  white-space: nowrap; 
 }
 
 .hero-subtitle {
-  font-family: 'Lato', sans-serif;
-  font-size: 1.15rem;
-  color: var(--steel-grey);
-  margin-bottom: 2.5rem;
-  font-weight: 300;
-  letter-spacing: 1px;
-  line-height: 1.6;
+  font-family: 'Lato', sans-serif; font-size: 1.15rem; color: var(--steel-grey);
+  margin-bottom: 2.5rem; font-weight: 300; letter-spacing: 1px;
 }
-
 .divider-line {
-  height: 2px;
-  width: 100px;
-  background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
-  margin: 0 auto 2rem;
-  box-shadow: 0 0 15px var(--gold-primary);
+  height: 2px; width: 100px; background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+  margin: 0 auto 2rem; box-shadow: 0 0 15px var(--gold-primary);
 }
 
+/* =========================================
+   5. BUTTONS & STACK
+   ========================================= */
 .hero-buttons {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: 3rem; 
 }
 
-.apply-btn {
-  background: transparent;
-  color: var(--gold-primary);
-  font-family: 'Cinzel', serif;
-  font-weight: 700;
-  font-size: 1.2rem;
-  letter-spacing: 3px;
-  padding: 1rem 3rem;
-  border: 1px solid var(--gold-primary);
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  transition: all 0.4s ease;
-  box-shadow: inset 0 0 20px rgba(197, 160, 89, 0.1);
+.apply-btn-sheen {
+  background: rgba(0,0,0,0.4); color: var(--gold-primary);
+  font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.2rem; letter-spacing: 3px;
+  padding: 1rem 3rem; border: 1px solid var(--gold-primary); position: relative; overflow: hidden;
+  cursor: pointer; transition: all 0.3s ease; z-index: 1;
 }
-
-.apply-btn::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: var(--gold-primary);
-  z-index: -1;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.4s var(--transition-slow);
+.apply-btn-sheen::after {
+    content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4), transparent);
+    transform: skewX(-25deg); transition: none; z-index: -1;
 }
-
-.apply-btn:hover {
-  color: #000;
-  box-shadow: 0 0 40px rgba(197, 160, 89, 0.6);
-  border-color: var(--gold-highlight);
+.apply-btn-sheen:hover {
+    color: #fff; border-color: #fff;
+    box-shadow: 0 0 20px rgba(197, 160, 89, 0.6), 0 0 40px rgba(197, 160, 89, 0.3);
+    transform: translateY(-2px);
 }
+.apply-btn-sheen:hover::after { animation: sheenSlash 0.5s ease-in-out forwards; }
+@keyframes sheenSlash { 0% { left: -100%; } 100% { left: 200%; } }
 
-.apply-btn:hover::before {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
-.nav-buttons {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
+.nav-buttons { display: flex; gap: 1rem; justify-content: center; }
 .nav-btn {
-  background: rgba(255, 255, 255, 0.03);
-  color: var(--steel-grey);
-  font-family: 'Lato', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 600;
-  padding: 0.8rem 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  background: rgba(255, 255, 255, 0.03); color: var(--steel-grey);
+  font-family: 'Lato', sans-serif; font-size: 0.9rem; padding: 0.8rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1); cursor: pointer; transition: all 0.3s ease;
+  text-transform: uppercase; letter-spacing: 1px;
 }
-
 .nav-btn:hover {
-  border-color: var(--gold-primary);
-  color: var(--gold-highlight);
+  border-color: var(--gold-primary); color: var(--gold-highlight);
   background: rgba(197, 160, 89, 0.1);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
-
-.nav-icon { width: 18px; height: 18px; }
 
 /* =========================================
-   5. DOMAIN CARDS (Hover: Solid Gold & Black)
+   6. DOMAIN CARDS
    ========================================= */
-.domains-section {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  margin-top: 4rem;
-}
-
+.domains-section { position: relative; z-index: 10; width: 100%; margin-top: 4rem; }
 .section-heading {
-  font-size: 2.5rem;
-  text-align: center;
-  margin: 3rem 0;
-  color: var(--gold-primary);
-  text-shadow: 0 0 15px rgba(197, 160, 89, 0.3);
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  font-size: 2.5rem; text-align: center; margin: 3rem 0;
+  color: var(--gold-primary); text-shadow: 0 0 15px rgba(197, 160, 89, 0.3);
+  text-transform: uppercase; letter-spacing: 2px;
 }
-
 .leads-grid {
-  display: grid;
+  display: grid; 
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  margin-bottom: 3rem;
-  z-index: 1;
+  gap: 12px; 
   padding: 0 2rem;
 }
-
-/* Individual Domain Card - Default State (Dark) */
 .lead-card {
-  /* Dark Obsidian Glass */
-  background: rgb(0, 0, 0);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--glass-border);
-  border-radius: 8px;
-  padding: 2.5rem 2rem;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  cursor: pointer;
+  background: rgb(0, 0, 0); backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border); border-radius: 8px;
+  height: 280px; 
+  width: 100%;
+  padding: 1.5rem; 
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; 
+  transition: 0.4s; cursor: pointer;
 }
-
-/* HOVER STATE: Solid Gold Fill (Like the Image) */
 .lead-card:hover {
-  background: var(--gold-primary); /* Fills with solid gold */
-  border-color: var(--gold-highlight); /* Lighter gold border */
-  transform: translateY(-8px);
-  backdrop-filter: none;
-  /* The "Glowing Gold" shadow effect */
-  box-shadow: 0 0 35px rgba(197, 160, 89, 0.6), 0 0 10px rgba(197, 160, 89, 0.4);
+  background: var(--gold-primary); border-color: var(--gold-highlight);
+  transform: translateY(-5px);
+  box-shadow: 0 0 35px rgba(197, 160, 89, 0.6);
+  z-index: 2; 
 }
-
-/* Card Title - Default State */
 .lead-title {
-  font-family: 'Cinzel', serif;
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--gold-highlight);
-  margin-top: 1rem;
-  letter-spacing: 1px;
-  text-align: center;
-  transition: all 0.3s ease;
+  font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 700;
+  color: var(--gold-highlight); margin-top: 1rem; text-align: center; transition: 0.3s;
+  line-height: 1.3;
 }
+.lead-card:hover .lead-title { color: #050505; text-shadow: none; }
+.domain-icon { width: 80px; height: 80px; transition: 0.3s; filter: drop-shadow(0 0 10px rgba(197, 160, 89, 0.4)); object-fit: contain;}
+.lead-card:hover .domain-icon { transform: scale(1.1); filter: brightness(0); }
 
-/* HOVER STATE: Title turns Black */
-.lead-card:hover .lead-title {
-  color: #050505; /* Black text */
-  text-shadow: none; /* Clean sharp text */
-}
-
-.icon-container {
-  margin-bottom: 1.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80px;
-}
-
-/* Domain Icon - Default State */
-.domain-icon {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  filter: drop-shadow(0 0 10px rgba(197, 160, 89, 0.4));
-  transition: all 0.3s ease;
-}
-
-/* HOVER STATE: Icon turns Black */
-.lead-card:hover .domain-icon {
-  transform: scale(1.1);
-  /* brightness(0) makes any image purely black */
-  filter: brightness(0); 
-}
-
-/* =========================================
-   6. ANIMATION KEYFRAMES
-   ========================================= */
+/* Animation Utils */
 @keyframes throneEnter { to { opacity: 1; } }
 @keyframes throneHover { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-@keyframes dragonEnter { to { right: 5%; opacity: 1; } }
-@keyframes dragonFloat { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
-@keyframes glassShine { 0% { left: -150%; opacity: 0; } 50% { opacity: 0.5; } 100% { left: 150%; opacity: 0; } }
-
-/* Utilities */
-.fade-up, .fade-down, .zoom-in {
-  opacity: 0;
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
+.fade-up, .fade-down, .zoom-in { opacity: 0; transition: 0.8s; }
 .fade-up { transform: translateY(40px); }
 .fade-down { transform: translateY(-40px); }
 .zoom-in { transform: scale(0.9); }
 .visible { opacity: 1; transform: translate(0,0) scale(1); }
 
-/* =========================================
-   7. RESPONSIVE DESIGN (Mobile Stack)
-   ========================================= */
 @media (max-width: 968px) {
-  /* Stack Hero Section */
-  .hero-section {
-    flex-direction: column-reverse; /* Box on top, Throne below */
-    padding-top: 60px;
-    height: auto;
-  }
-
-  .hero-visual-side, .hero-content-side {
-    width: 100%;
-    flex: none;
-    height: auto;
-    padding: 2rem 1rem;
-  }
-
-  .hero-content-side {
-    padding-bottom: 0; /* Remove extra space between box and throne */
-  }
-
-  .hero-visual-side {
-    height: 400px; /* Space for throne */
-  }
-
-  .hero-box {
-    width: 100%;
-    padding: 3rem 1.5rem;
-  }
-
-  .hero-title { font-size: 2.5rem; }
-  
-  .iron-throne { 
-    width: 60%;
-    min-width: 280px;
-  }
-  
-  .dragon { width: 180px; top: 2%; right: -10px; opacity: 0.8; }
-  
-  /* Grid Adjustments */
-  .leads-grid { grid-template-columns: 1fr; gap: 1.5rem; padding: 0 1rem; }
+  .hero-section { flex-direction: column-reverse; padding-top: 60px; height: auto; }
+  .hero-visual-side, .hero-content-side { width: 100%; height: auto; padding: 2rem 1rem; }
+  .hero-box { width: 100%; transform: none; margin-right: 0; }
+  .hero-title { font-size: 2.2rem; white-space: normal; } 
+  .house-motto { font-size: 1.2rem; top: 1rem; }
 }

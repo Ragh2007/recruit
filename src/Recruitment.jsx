@@ -2,100 +2,30 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import "./Recruitment.css";
 import { useNavigate } from "react-router-dom";
-// Ensure these paths match your project structure
+// Ensure this path matches your project structure
 import throne from "/Images/1770564850_pasted.png";
-import dragon from "/Images/pngegg.png";
 
 const domains = [
-    {
-        id: "marketing-pr-event-management",
-        name: "Marketing PR & Event Management",
-        icon: "/Images/Logo/Marketing.png",
-        category: "non-tech"
-    },
-    {
-        id: "web-development",
-        name: "Web Development",
-        icon: "/Images/Logo/WebDevelopment.png",
-        category: "tech"
-    },
-    {
-        id: "cloud-computing",
-        name: "Cloud Computing",
-        icon: "/Images/Logo/CloudComputing.png",
-        category: "tech"
-    },
-    {
-        id: "iot-embedded-systems",
-        name: "IoT & Embedded Systems",
-        icon: "/Images/Logo/IoT&Embedded.png",
-        category: "tech"
-    },
-    {
-        id: "content-writing",
-        name: "Content Writing",
-        icon: "/Images/Logo/ContentWriting.png",
-        category: "non-tech"
-    },
-    {
-        id: "android-development",
-        name: "Android Development",
-        icon: "/Images/Logo/AppDevelopment.png",
-        category: "tech"
-    },
-    {
-        id: "data-analytics",
-        name: "Data Analytics",
-        icon: "/Images/Logo/DataAnalytics.png",
-        category: "tech"
-    },
-    {
-        id: "photography-video",
-        name: "Photography & Video",
-        icon: "/Images/Logo/PhotoVideoEditing.png",
-        category: "non-tech"
-    },
-    {
-        id: "java",
-        name: "Java",
-        icon: "/Images/Logo/Java.png",
-        category: "tech"
-    },
-    {
-        id: "ai-ml",
-        name: "AI/ML",
-        icon: "/Images/Logo/AIML.png",
-        category: "tech"
-    },
-    {
-        id: "cyber-security",
-        name: "Cyber Security",
-        icon: "/Images/Logo/CyberSecurity.png",
-        category: "tech"
-    },
-    {
-        id: "graphics-designing-ui-ux",
-        name: "Graphics Designing & UI/UX",
-        icon: "/Images/Logo/UIUX.png",
-        category: "non-tech"
-    },
-    {
-        id: "game-development",
-        name: "Game Development",
-        icon: "/Images/Logo/gamedev.png",
-        category: "tech"
-    },
+    { id: "marketing-pr-event-management", name: "Marketing PR & Event Management", icon: "/Images/Logo/Marketing.png", category: "non-tech" },
+    { id: "web-development", name: "Web Development", icon: "/Images/Logo/WebDevelopment.png", category: "tech" },
+    { id: "cloud-computing", name: "Cloud Computing", icon: "/Images/Logo/CloudComputing.png", category: "tech" },
+    { id: "iot-embedded-systems", name: "IoT & Embedded Systems", icon: "/Images/Logo/IoT&Embedded.png", category: "tech" },
+    { id: "content-writing", name: "Content Writing", icon: "/Images/Logo/ContentWriting.png", category: "non-tech" },
+    { id: "android-development", name: "Android Development", icon: "/Images/Logo/AppDevelopment.png", category: "tech" },
+    { id: "data-analytics", name: "Data Analytics", icon: "/Images/Logo/DataAnalytics.png", category: "tech" },
+    { id: "photography-video", name: "Photography & Video", icon: "/Images/Logo/PhotoVideoEditing.png", category: "non-tech" },
+    { id: "java", name: "Java", icon: "/Images/Logo/Java.png", category: "tech" },
+    { id: "ai-ml", name: "AI/ML", icon: "/Images/Logo/AIML.png", category: "tech" },
+    { id: "cyber-security", name: "Cyber Security", icon: "/Images/Logo/CyberSecurity.png", category: "tech" },
+    { id: "graphics-designing-ui-ux", name: "Graphics Designing & UI/UX", icon: "/Images/Logo/UIUX.png", category: "non-tech" },
+    { id: "game-development", name: "Game Development", icon: "/Images/Logo/gamedev.png", category: "tech" },
 ];
 
 const Recruitment = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Intersection Observer for scroll animations
-        const animatedElements = document.querySelectorAll(
-            ".fade-up, .fade-down, .zoom-in, .slide-up"
-        );
-
+        const animatedElements = document.querySelectorAll(".fade-up, .fade-down, .zoom-in, .slide-up");
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
@@ -106,12 +36,8 @@ const Recruitment = () => {
             },
             { threshold: 0.1 }
         );
-
         animatedElements.forEach((el) => observer.observe(el));
-
-        return () => {
-            observer.disconnect();
-        };
+        return () => observer.disconnect();
     }, []);
 
     const handleApplyNow = () => {
@@ -132,7 +58,6 @@ const Recruitment = () => {
     const techDomains = domains.filter(d => d.category === 'tech');
     const nonTechDomains = domains.filter(d => d.category === 'non-tech');
 
-    // Reusable Card Component to ensure consistent theme application
     const DomainCard = ({ domain, index }) => (
         <motion.div
             layout
@@ -143,17 +68,16 @@ const Recruitment = () => {
             whileHover={{ scale: 1.03, y: -5 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => handleDomainClick(domain.id)}
-            className="lead-card cursor-pointer" // Uses Master CSS class
+            className="lead-card cursor-pointer"
         >
-            <div className="icon-container" style={{ marginBottom: '1.5rem' }}>
+            <div className="icon-container">
                 <img 
                     src={domain.icon} 
                     alt={domain.name} 
-                    className="domain-icon" // Uses Master CSS animation & shadow
-                    style={{ width: '80px', height: '80px' }} // Adjusted size for grid
+                    className="domain-icon" 
                 />
             </div>
-            <h3 className="lead-title text-center" style={{ fontSize: '1.4rem', marginBottom: 0 }}>
+            <h3 className="lead-title text-center">
                 {domain.name}
             </h3>
         </motion.div>
@@ -161,28 +85,38 @@ const Recruitment = () => {
 
     return (
     <div className="body">
+        {/* Snow Animation Container */}
+        <div className="snow-container">
+            {[...Array(60)].map((_, i) => {
+                const duration = 6 + Math.random() * 6; 
+                const size = Math.random() < 0.5 ? 'small-flake' : 'large-flake';
+                return (
+                    <div 
+                        key={i} 
+                        className={`ice-flake ${size}`}
+                        style={{
+                            left: `${Math.random() * 100}%`,
+                            animationDelay: `${Math.random() * 5}s`,
+                            animationDuration: `${duration}s`,
+                            opacity: Math.random() * 0.7
+                        }}
+                    >❄</div>
+                );
+            })}
+        </div>
+
         <div className="min-h-screen w-full relative overflow-hidden">
-            {/* Particles Background */}
             <div id="particles-js" className="absolute inset-0 z-0 pointer-events-none"></div>
 
-            {/* Dragon lives outside the split so it can fly anywhere */}
-            
+            {/* Motto - Positioned via CSS to Left */}
+            <p className="house-motto">Winter is Coming...</p>
 
             <div className="max-w-7xl mx-auto relative z-10">
-                
-                {/* === HERO SECTION (SPLIT 50/50) === */}
                 <div className="hero-section">
-                    
-                    {/* LEFT SIDE: THRONE */}
                     <div className="hero-visual-side">
-                         <img
-                            src={throne}
-                            alt="Iron Throne"
-                            className="iron-throne"
-                        />
+                         <img src={throne} alt="Iron Throne" className="iron-throne"/>
                     </div>
 
-                    {/* RIGHT SIDE: CONTENT BOX */}
                     <div className="hero-content-side">
                         <div className="hero-box fade-down zoom-in">
                             <motion.div
@@ -191,7 +125,10 @@ const Recruitment = () => {
                                 transition={{ duration: 0.6 }}
                                 className="hero-content"
                             >
-                                <h1 className="hero-title">Join E-Labs</h1>
+                                {/* UPDATED: Title Text */}
+                                <h1 className="hero-title">
+                                    Join <span className="keep-together">E-labs</span>
+                                </h1>
                                 <div className="divider-line"></div>
                                 <p className="hero-subtitle">
                                     Explore our domains and discover where your passion meets opportunity
@@ -199,10 +136,9 @@ const Recruitment = () => {
 
                                 <div className="hero-buttons">
                                     <motion.button
-                                        whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.95 }}
                                         onClick={handleApplyNow}
-                                        className="apply-btn"
+                                        className="apply-btn-sheen"
                                     >
                                         APPLY NOW
                                     </motion.button>
@@ -215,7 +151,6 @@ const Recruitment = () => {
                                             className="nav-btn"
                                         >
                                             <span>Tech Domains</span>
-                                            {/* SVG Here */}
                                         </motion.button>
 
                                         <motion.button
@@ -225,7 +160,6 @@ const Recruitment = () => {
                                             className="nav-btn"
                                         >
                                             <span>Non-Tech Domains</span>
-                                            {/* SVG Here */}
                                         </motion.button>
                                     </div>
                                 </div>
@@ -233,41 +167,38 @@ const Recruitment = () => {
                         </div>
                     </div>
                 </div>
-                    {/* TECH DOMAINS SECTION */}
-                    <div id="tech-domains" className="domains-section">
-                        <h2 className="section-heading fade-up">Tech Domains</h2>
-                        
-                        {/* REPLACED Tailwind Grid with Theme 'leads-grid' */}
-                        <div className="leads-grid">
-                            {techDomains.map((domain, index) => (
-                                <DomainCard key={domain.id} domain={domain} index={index} />
-                            ))}
-                        </div>
-                    </div>
 
-                    {/* NON-TECH DOMAINS SECTION */}
-                    <div id="non-tech-domains" className="domains-section mt-24 mb-16">
-                        <h2 className="section-heading fade-up">Non-Tech Domains</h2>
-                        
-                        <div className="leads-grid">
-                            {nonTechDomains.map((domain, index) => (
-                                <DomainCard key={domain.id} domain={domain} index={index} />
-                            ))}
-                        </div>
+                {/* Tech Domains */}
+                <div id="tech-domains" className="domains-section">
+                    <h2 className="section-heading fade-up">Tech Domains</h2>
+                    <div className="leads-grid">
+                        {techDomains.map((domain, index) => (
+                            <DomainCard key={domain.id} domain={domain} index={index} />
+                        ))}
                     </div>
-
-                    {/* Footer Text */}
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 0.7 }}
-                        viewport={{ once: true }}
-                        className="hero-subtitle text-center mt-8 pb-12"
-                    >
-                        Click on any domain to view recruitment criteria and contact information
-                    </motion.p>
                 </div>
+
+                {/* Non-Tech Domains */}
+                <div id="non-tech-domains" className="domains-section mt-24 mb-16">
+                    <h2 className="section-heading fade-up">Non-Tech Domains</h2>
+                    <div className="leads-grid">
+                        {nonTechDomains.map((domain, index) => (
+                            <DomainCard key={domain.id} domain={domain} index={index} />
+                        ))}
+                    </div>
+                </div>
+
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 0.7 }}
+                    viewport={{ once: true }}
+                    className="hero-subtitle text-center mt-8 pb-12"
+                >
+                    Click on any domain to view recruitment criteria and contact information
+                </motion.p>
             </div>
         </div>
+    </div>
     );
 };
 
