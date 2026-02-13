@@ -331,7 +331,6 @@ const Recruitment = () => {
                     Click on any domain to view recruitment criteria and contact information
                 </motion.p>
             </div>
-        </div>
     );
 };
 
