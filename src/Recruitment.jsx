@@ -332,7 +332,6 @@ const Recruitment = () => {
                 </motion.p>
             </div>
         </div>
-    </div>
     );
 };
 
