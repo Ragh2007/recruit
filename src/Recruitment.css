@@ -265,7 +265,9 @@ body,
   );
   transform: rotate(25deg);
 }
-
+.apply-btn:hover {
+  color: #111; /* text changes AFTER fill starts */
+}
 /* Trigger animation on hover */
 .apply-btn:hover::after {
   animation: sheenSlash 0.9s ease forwards;
