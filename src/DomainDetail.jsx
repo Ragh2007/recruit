@@ -211,7 +211,7 @@ const domainsData = {
     },
     "event-management": {
         name: "Event Management",
-        icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E🎉%3C/text%3E%3C/svg%3E",
+        icon: "/Images/assets/EVENT_MANAGEMENT.png",
         criteria: [
             "Strong communication skills",
             "Basic prior knowledge or experience in event management",
@@ -229,7 +229,7 @@ const domainsData = {
     },
     "entrepreneurship-startup": {
         name: "Entrepreneurship and Startup",
-        icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E🚀%3C/text%3E%3C/svg%3E",
+        icon: "/Images/assets/ENTREPRENEURSHIP.png",
         criteria: [
             "Interest in entrepreneurship and startups",
             "Creative and innovative thinking",
@@ -248,7 +248,7 @@ const domainsData = {
     // Non-Tech Domains - Creative Media & Design
     "photography": {
         name: "Photography",
-        icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E📷%3C/text%3E%3C/svg%3E",
+        icon: "/Images/assets/photo.png",
         criteria: [
             "Basic understanding of camera fundamentals (ISO, aperture, shutter speed) and shooting modes",
             "Knowledge of composition basics (rule of thirds, framing, leading lines, lighting)",
@@ -266,7 +266,7 @@ const domainsData = {
     },
     "video-editing": {
         name: "Video Editing",
-        icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E🎬%3C/text%3E%3C/svg%3E",
+        icon: "/Images/assets/video.png",
         criteria: [
             "Basic knowledge of any editing software (CapCut/Premiere Pro/DaVinci Resolve)",
             "Understanding of simple cuts, text, music, beat sync, basic colour grading, and aspect ratios",

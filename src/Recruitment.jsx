@@ -79,14 +79,14 @@ const domains = [
     {
         id: "event-management",
         name: "Event Management",
-        icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E🎉%3C/text%3E%3C/svg%3E",
+        icon: "/Images/assets/EVENT_MANAGEMENT.png",
         category: "non-tech",
         subcategory: "marketing"
     },
     {
         id: "entrepreneurship-startup",
         name: "Entrepreneurship and Startup",
-        icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E🚀%3C/text%3E%3C/svg%3E",
+        icon: "/Images/assets/ENTREPRENEURSHIP.png",
         category: "non-tech",
         subcategory: "marketing"
     },
@@ -94,14 +94,14 @@ const domains = [
     {
         id: "photography",
         name: "Photography",
-        icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E📷%3C/text%3E%3C/svg%3E",
+        icon: "/Images/assets/photo.png",
         category: "non-tech",
         subcategory: "creative"
     },
     {
         id: "video-editing",
         name: "Video Editing",
-        icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E🎬%3C/text%3E%3C/svg%3E",
+        icon: "/Images/assets/video.png",
         category: "non-tech",
         subcategory: "creative"
     },
