@@ -29,7 +29,7 @@ const domainsData = {
     },
     "embedded-systems": {
         name: "Embedded Systems",
-        icon: "/Images/Logo/IoT&Embedded.png",
+        icon: "/Images/Logo/embedded.png",
         criteria: [
             "Familiar with basic communication protocols",
             "Good understanding of how microcontrollers work in a system",
@@ -40,9 +40,9 @@ const domainsData = {
             name: "Suprit Mangaraj",
             phone: "+91 79 7828 0261",
         },
-        assistantLead: {
-            name: "Saurav Jena & Utsah Puspalak",
-            phone: "+91 7656 072 305",
+       assistantLead: {
+            name: "Ustah Puspalak  & Saurav Jena",
+            phone: "+91 96634 66751/ +91 7656 072 305",
         },
     },
     "cloud-computing": {

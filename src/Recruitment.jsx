@@ -17,7 +17,7 @@ const domains = [
     {
         id: "embedded-systems",
         name: "Embedded Systems",
-        icon: "/Images/Logo/IoT&Embedded.png",
+        icon: "/Images/Logo/embedded.png",
         category: "tech"
     },
     {
