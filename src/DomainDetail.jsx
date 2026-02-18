@@ -151,7 +151,7 @@ const domainsData = {
             phone: "Contact via E-Labs",
         },
         assistantLead: {
-            name: "Shashank Mishra",
+            name: "Shashank Sharma",
             phone: "Contact via E-Labs",
         },
     },
